@@ -5,8 +5,8 @@ cp $HOME/experiment /tmp
 cd /tmp
 
 #Install go
-wget go1.20.4.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
+wget "https://go.dev/dl/go1.20.4.linux-amd64.tar.gz"
+tar "-C /usr/local -xzf go1.20.4.linux-amd64.tar.gz"
 export PATH=$PATH:/usr/local/go/bin
 
 #Build and run experiment
