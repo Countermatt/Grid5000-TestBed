@@ -1,11 +1,15 @@
 import logging
 import enoslib as en
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 en.init_logging(level=logging.INFO)
 en.check()
 
-nb_node = 2
-arguments = 5  # nb_second
+#Change to your Grid5000 user
+nb_node = 5
+arguments = 20  # nb_second
 network = en.G5kNetworkConf(type="prod", roles=["experiment_network"], site="nancy")
 
 conf = (
@@ -19,14 +23,15 @@ conf = (
 # This will validate the configuration, but not reserve resources yet
 provider = en.G5k(conf)
 roles, networks = provider.init()
+
+with en.actions(roles=roles["first"]) as p:
+    p.shell("/home/mapigaglio/run1.sh " + str(arguments + 10) +" &")
+
+with en.actions(roles=roles["experiment"]) as p:
+    p.shell("/home/mapigaglio/run1.sh "  + str(arguments))
 #launch script with list of nodes for arguments
-results = en.run_command("/bin/bash" + " ./run1.sh "  + str(arguments), roles=["first"])
-for result in results:
-    print(result.payload["stdout"])
-    
-results = en.run_command("/bin/bash" + " ./run2.sh "  + str(arguments), roles=["experiments"])
-for result in results:
-    print(result.payload["stdout"])
+#results = en.run_command("/home/mapigaglio/run1.sh "  + str(arguments), roles=roles["first"])
+#results = en.run_command("/home/mapigaglio/run2.sh "  + str(arguments), roles=roles["experiments"])
 
 # Release all Grid'5000 resources
 provider.destroy()
