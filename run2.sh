@@ -12,4 +12,4 @@ export PATH=$PATH:/usr/local/go/bin
 git clone https://github.com/datahop/libp2p-das
 cd libp2p-das
 ./run.sh $1
-cp *.csv $home  
+cp *.csv /home/mapigaglio

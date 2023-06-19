@@ -9,7 +9,7 @@ en.check()
 
 #Change to your Grid5000 user
 nb_node = 5
-arguments = 20  # nb_second
+arguments = 5  # nb_second
 network = en.G5kNetworkConf(type="prod", roles=["experiment_network"], site="nancy")
 
 conf = (
