@@ -8,7 +8,7 @@ sudo-g5k tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 #Build and run experiment
-git clone https://github.com/datahop/libp2p-das
+git clone https://github.com/Countermatt/libp2p-das.git
 cd libp2p-das
 if hostname = $2
 then
@@ -16,6 +16,7 @@ then
     for (( i=0; i<$5-2; i++ ))
     do
     ./run.sh $1 &
+    sleep 0.05
     done
     ./run.sh $1
 else
@@ -24,12 +25,15 @@ else
         for (( i=0; i<$4-1; i++ ))
         do
         ./run.sh $1 &
+        sleep 0.05
+
         done
         ./run.sh $1
     else
         for (( i=0; i<$5-1; i++ ))
         do
         ./run.sh $1 &
+        sleep 0.05
         done
         ./run.sh $1
     fi
